@@ -4,38 +4,15 @@ import Button from "@material-ui/core/Button";
 import styles from "./Slider.module.css";
 import modalBackDrop from "./ModalBackDrop";
 function Sliders({
-  close,
-  changeColor,
   colorR,
   colorG,
   colorB,
-  setColorR,
-  setColorG,
-  setColorB,
+  onChangeColorR,
+  onChangeColorG,
+  onChangeColorB,
+  cancle,
+  submit,
 }) {
-  const onChangeColorR = (event, newValue) => {
-    setColorR(newValue);
-  };
-  const onChangeColorG = (event, newValue) => {
-    setColorG(newValue);
-  };
-  const onChangeColorB = (event, newValue) => {
-    setColorB(newValue);
-  };
-
-  const onSubmit = () => {
-    changeColor(`${colorR},${colorG},${colorB}`);
-    close();
-  };
-
-  const onCancel = () => {
-    changeColor("222,19,229");
-    setColorR(222);
-    setColorG(19);
-    setColorB(229);
-    close();
-  };
-
   return (
     <>
       <div className={styles.sliderModal}>
@@ -80,18 +57,10 @@ function Sliders({
           </div>
         </div>
         <div className={styles.buttons}>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => onCancel()}
-          >
+          <Button variant="contained" color="primary" onClick={cancle}>
             Cancle
           </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => onSubmit()}
-          >
+          <Button variant="contained" color="primary" onClick={submit}>
             Submit
           </Button>
         </div>

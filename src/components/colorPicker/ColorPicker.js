@@ -4,16 +4,35 @@ import styles from "./ColorPicker.module.css";
 
 function ColorPicker() {
   const [showModal, setShowModal] = useState(false);
-  const close = () => {
-    setShowModal((prev) => false);
-  };
   const [colorR, setColorR] = useState(222);
   const [colorG, setColorG] = useState(19);
   const [colorB, setColorB] = useState(229);
   const [bgColor, setBgColor] = useState("222,19,229");
 
-  const changeColor = (color) => {
-    setBgColor(color);
+  const close = () => {
+    setShowModal((prev) => false);
+  };
+  const onChangeColorR = (event, newValue) => {
+    setColorR(newValue);
+  };
+  const onChangeColorG = (event, newValue) => {
+    setColorG(newValue);
+  };
+  const onChangeColorB = (event, newValue) => {
+    setColorB(newValue);
+  };
+
+  const onSubmit = () => {
+    setBgColor(`${colorR},${colorG},${colorB}`);
+    close();
+  };
+
+  const onCancel = () => {
+    setBgColor("222,19,229");
+    setColorR(222);
+    setColorG(19);
+    setColorB(229);
+    close();
   };
 
   return (
@@ -28,14 +47,14 @@ function ColorPicker() {
         </button>
         {showModal && (
           <Sliders
-            close={() => close()}
-            changeColor={changeColor}
             colorR={colorR}
             colorG={colorG}
             colorB={colorB}
-            setColorR={setColorR}
-            setColorG={setColorG}
-            setColorB={setColorB}
+            onChangeColorR={onChangeColorR}
+            onChangeColorG={onChangeColorG}
+            onChangeColorB={onChangeColorB}
+            submit={onSubmit}
+            cancle={onCancel}
           />
         )}
       </div>
